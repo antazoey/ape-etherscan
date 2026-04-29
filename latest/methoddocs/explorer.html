@@ -6,8 +6,8 @@
       <link rel="canonical" href="ape-etherscan/methoddocs/explorer.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
-  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=397bb51e" />
-    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=83eaa723" />
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=44020203" />
     <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,9 +19,9 @@
 }
 </style>
     <meta property="og:type" content="website"/>
-<meta property="og:url" content="ape-etherscan/methoddocs/explorer.html"/>
-<meta property="og:title" content="Explorer"/>
-<meta name="twitter:card" content="summary"/>
+  <meta property="og:url" content="ape-etherscan/methoddocs/explorer.html"/>
+  <meta property="og:title" content="Explorer"/>
+    <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="sy-head">
   <div class="sy-head-blur"></div>
@@ -31,7 +31,7 @@
       <img class="dark-logo" src="../_static/logo_green.svg" alt="ape-etherscan" height="28" loading="lazy" />
       <strong>ape-etherscan</strong>
     </a>
-    <div class="sy-head-nav" id="HeadNav">
+    <div class="sy-head-nav" id="head-nav">
       <nav class="sy-head-links"></nav>
       <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
   <input type="text" name="q" placeholder="Search" />
@@ -43,11 +43,11 @@ data-aria-auto="Switch to light color mode"
 data-aria-light="Switch to dark color mode"
 data-aria-dark="Switch to auto color mode">
 <i class="i-lucide theme-icon"></i>
-</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="HeadNav" aria-expanded="false">
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
         <div class="hamburger">
           <span class="hamburger_1"></span>
-          <span class="hamburger_2 -translate-x-2"></span>
-          <span class="hamburger_3 -translate-x-1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
         </div>
       </button>
     </div>
@@ -60,7 +60,6 @@ data-aria-dark="Switch to auto color mode">
         <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">User Guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../userguides/quickstart.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../userguides/quickstart.html#querying-accounts">Querying Accounts</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">Python Reference</span></p>
 <ul class="current">
@@ -86,15 +85,18 @@ data-aria-dark="Switch to auto color mode">
 <li><a class="reference internal" href="#ape_etherscan.explorer.Etherscan.get_address_url"><code class="docutils literal notranslate">get_address_url()</span></code></a></li>
 <li><a class="reference internal" href="#ape_etherscan.explorer.Etherscan.get_contract_type"><code class="docutils literal notranslate">get_contract_type()</span></code></a></li>
 <li><a class="reference internal" href="#ape_etherscan.explorer.Etherscan.get_manifest"><code class="docutils literal notranslate">get_manifest()</span></code></a></li>
+<li><a class="reference internal" href="#ape_etherscan.explorer.Etherscan.get_supported_chains"><code class="docutils literal notranslate">get_supported_chains()</span></code></a></li>
 <li><a class="reference internal" href="#ape_etherscan.explorer.Etherscan.get_transaction_url"><code class="docutils literal notranslate">get_transaction_url()</span></code></a></li>
 <li><a class="reference internal" href="#ape_etherscan.explorer.Etherscan.publish_contract"><code class="docutils literal notranslate">publish_contract()</span></code></a></li>
+<li><a class="reference internal" href="#ape_etherscan.explorer.Etherscan.supports_chain"><code class="docutils literal notranslate">supports_chain()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
   <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
-  <main class="sy-main w-full max-sm:max-w-full print:pt-6"><div class="sy-breadcrumbs" role="navigation">
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
   <div class="sy-breadcrumbs-inner flex items-center">
     <div class="md:hidden mr-3">
       <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
@@ -117,15 +119,50 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </div><div class="flex flex-col break-words justify-between">
-      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
-        <article class="yue" role="main">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="ape-etherscan/_sources/methoddocs/explorer.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="ape-etherscan/_sources/methoddocs/explorer.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="ape-etherscan/_sources/methoddocs/explorer.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20ape-etherscan/_sources/methoddocs/explorer.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20ape-etherscan/_sources/methoddocs/explorer.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
           <section id="module-ape_etherscan.explorer">
 <span id="explorer"></span><h1>Explorer<a class="headerlink" href="#module-ape_etherscan.explorer" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="ape_etherscan.explorer.Etherscan">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ape_etherscan.explorer.</span></span><span class="sig-name descname"><span class="pre">Etherscan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">network</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NetworkAPI</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ape_etherscan.explorer.Etherscan" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ExplorerAPI</span></code></p>
-<p>The explorer API implemention for Etherscan.</p>
+<p>The explorer API implementation for Etherscan.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="ape_etherscan.explorer.Etherscan.etherscan_api_uri">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">etherscan_api_uri</span></span><a class="headerlink" href="#ape_etherscan.explorer.Etherscan.etherscan_api_uri" title="Link to this definition"></a></dt>
@@ -191,6 +228,18 @@ published.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="ape_etherscan.explorer.Etherscan.get_supported_chains">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_supported_chains</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ape_etherscan.explorer.Etherscan.get_supported_chains" title="Link to this definition"></a></dt>
+<dd><p>Get a list of chain data for all chains Etherscan supports.
+<a class="reference external" href="https://docs.etherscan.io/contract-verification/supported-chains">https://docs.etherscan.io/contract-verification/supported-chains</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[dict]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="ape_etherscan.explorer.Etherscan.get_transaction_url">
 <span class="sig-name descname"><span class="pre">get_transaction_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transaction_hash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ape_etherscan.explorer.Etherscan.get_transaction_url" title="Link to this definition"></a></dt>
 <dd><p>Get the transaction URL for the given transaction.</p>
@@ -214,6 +263,23 @@ published.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>address</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">AddressType</span></code>) – The address of the deployed contract.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ape_etherscan.explorer.Etherscan.supports_chain">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">supports_chain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chain_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#ape_etherscan.explorer.Etherscan.supports_chain" title="Link to this definition"></a></dt>
+<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> when the given chain ID is claimed to be
+supported by this explorer. Adhoc / custom networks rely on
+this feature to have automatic-explorer support. Explorer
+plugins should override this.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chain_id</strong> (<em>int</em>) – The chain ID to check.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
@@ -248,7 +314,7 @@ published.</p>
 <footer class="sy-foot">
   <div class="sy-foot-inner sy-container mx-auto">
     <div class="sy-foot-reserved md:flex justify-between items-center">
-      <div class="sy-foot-copyright"><p>2024, ApeWorX LTD</p>
+      <div class="sy-foot-copyright"><p>2026, ApeWorX LTD</p>
   
   <p>
     Made with
@@ -265,8 +331,8 @@ published.</p>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script data-domain="docs.apeworx.io" defer="defer" src="https://plausible.io/js/script.js"></script>
-      <script src="../_static/shibuya.js?v=e2e99575"></script></body>
+      <script src="../_static/shibuya.js?v=cac61aee"></script></body>
 </html>
