@@ -251,15 +251,28 @@ class ContractClient(_APIClient):
         license_type: int | None = None,
         libraries: dict[str, str] | None = None,
         via_ir: bool = False,
+        language: str = "solidity",
     ) -> str:
         libraries = libraries or {}
         if len(libraries) > 10:
             raise ValueError(f"Can only have up to 10 libraries (received {len(libraries)}).")
 
-        if not compiler_version.startswith("v"):
+        language = language.lower()
+
+        if language == "vyper":
+            # Etherscan expects e.g. "vyper:0.4.0" (no leading "v" on the number).
+            if not compiler_version.startswith("vyper:"):
+                number = compiler_version.lstrip("v")
+                compiler_version = f"vyper:{number}"
+
+        elif not compiler_version.startswith("v"):
             compiler_version = f"v{compiler_version}"
 
-        if "sourceCode" in standard_json_output:
+        if language == "vyper":
+            # Etherscan only supports the standard-JSON format for Vyper.
+            source_code = StringIO(json.dumps(standard_json_output))
+            code_format = "vyper-json"
+        elif "sourceCode" in standard_json_output:
             source_code = standard_json_output["sourceCode"]
             code_format = "solidity-single-file"
         else:
